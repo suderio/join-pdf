@@ -23,6 +23,8 @@ builds:
     goos:
       - linux
       - windows
+    goarch:
+      - amd64
   - id: cli
     main: ./main.go
     ldflags:

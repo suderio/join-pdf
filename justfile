@@ -5,7 +5,7 @@
 PROJECT_NAME := "join-pdf"
 
 # Versão para release (pode vir de tag Git)
-VERSION := "0.1.0"
+VERSION := "0.1"
 
 # Ambiente padrão
 set shell := ["bash", "-cu"]
