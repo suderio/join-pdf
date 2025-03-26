@@ -33,3 +33,6 @@ release: clean
 # Executa e imprime versão do binário local (debug)
 version:
 	./dist/{{PROJECT_NAME}}_linux_amd64/{{PROJECT_NAME}} --version
+
+icon:
+  rsrc -ico PDF.ico -o icon.syso
