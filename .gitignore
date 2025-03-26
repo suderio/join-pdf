@@ -1,0 +1,56 @@
+
+# Go build artifacts
+/dist/
+/bin/
+/build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Test binary and coverage
+*.cover
+*.test
+*.prof
+coverage.*
+
+# IDEs & editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.log
+*.DS_Store
+*.tmp
+
+# Go module cache (optional if vendoring)
+vendor/
+
+# Goreleaser
+*.tar.gz
+*.zip
+*.deb
+*.rpm
+checksums.txt
+release-notes.md
+
+# Byproducts
+*.old
+*.orig
+*.bak
+
+# Fyne (GUI) temp cache
+fyne.lock
+
+# Local build metadata
+.env
+.env.*
+*.local
+*.bak
+*.bak.*
+
+# Justfile backups
+.justfile.swp
