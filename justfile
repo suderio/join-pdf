@@ -17,18 +17,18 @@ clean:
 # Build local multiplataforma (sem publicar)
 build: clean
 	echo "🔧 Building snapshot for {{PROJECT_NAME}}..."
-	goreleaser build --clean --snapshot --rm-dist
+	goreleaser.exe build --clean --snapshot --rm-dist
 
 # Release real (gera changelog e pacotes, mas não publica)
 release-local: clean
 	echo "📦 Releasing local version {{VERSION}}..."
-	goreleaser release --clean --skip-publish
+	goreleaser.exe release --clean --skip-publish
 
 # Release real + publicação no GitHub
 release: clean
 	if [ -z "$GITHUB_TOKEN" ]; then echo "❌ GITHUB_TOKEN não definido"; exit 1; fi
 	echo "🚀 Publishing {{PROJECT_NAME}} {{VERSION}} to GitHub..."
-	goreleaser release --clean
+	goreleaser.exe release --clean
 
 # Executa e imprime versão do binário local (debug)
 version:

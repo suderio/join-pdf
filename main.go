@@ -34,7 +34,7 @@ func main() {
 		return
 	}
 
-	if *guiMode {
+	if *guiMode || len(os.Args) == 1 {
 		runGUI()
 		return
 	}
