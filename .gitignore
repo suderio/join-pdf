@@ -58,3 +58,5 @@ fyne.lock
 # Local test files
 arquivo*.pdf
 
+# Added by goreleaser init:
+dist/

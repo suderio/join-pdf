@@ -1,42 +1,73 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+version: 2
+
 project_name: join-pdf
 
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+    # you may remove this if you don't need go generate
+    - go generate ./...
+
 builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
   - id: cli
     main: ./main.go
-    env:
-      - CGO_ENABLED=0
-    goos: [linux, windows]
-    goarch: [amd64, arm64]
     ldflags:
       - -s -w -X main.version={{.Version}}
     binary: join-pdf
 
   - id: gui
     main: ./main.go
-    goos: [windows]
-    goarch: [amd64]
     ldflags:
       - -H=windowsgui -s -w -X main.version={{.Version}}
     binary: join-pdf-gui
 
 archives:
-  - id: default
-    format: tar.gz
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    builds: [cli]
-
-  - id: windows-gui
-    format: zip
-    name_template: "{{ .ProjectName }}-gui_{{ .Version }}_windows_{{ .Arch }}"
-    builds: [gui]
-    files:
-      - assets/icon.ico
+  - formats: [tar.gz]
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        formats: [zip]
 
 checksum:
   name_template: "checksums.txt"
 
-snapshot:
-  name_template: "dev"
-
 changelog:
-  skip: true
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+snapshot:
+  version_template: "dev"
+
+release:
+  footer: >-
+
+    ---
+
+    Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+
