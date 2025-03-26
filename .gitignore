@@ -54,3 +54,7 @@ fyne.lock
 
 # Justfile backups
 .justfile.swp
+
+# Local test files
+arquivo*.pdf
+
