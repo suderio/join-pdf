@@ -23,7 +23,6 @@ builds:
     goos:
       - linux
       - windows
-      - darwin
   - id: cli
     main: ./main.go
     ldflags:
