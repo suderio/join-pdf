@@ -20,21 +20,25 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
+  - id: cli
+    main: ./main.go
+    ldflags:
+      - -s -w -X main.version={{.Version}}
     goos:
       - linux
       - windows
     goarch:
       - amd64
-  - id: cli
-    main: ./main.go
-    ldflags:
-      - -s -w -X main.version={{.Version}}
     binary: join-pdf
 
   - id: gui
     main: ./main.go
     ldflags:
       - -H=windowsgui -s -w -X main.version={{.Version}}
+    goos:
+      - windows
+    goarch:
+      - amd64
     binary: join-pdf-gui
 
 archives:
